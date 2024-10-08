@@ -13,7 +13,7 @@ namespace JourneyToTheMysticCave_Beta
         public bool hurtByTrap;
         public bool floorDamage;
 
-        // one of these is used for the game log
+        // one of these is used for the game log // The dead bool is the one for the game log
         public bool mapDead;
         public bool dead;
 
@@ -27,7 +27,7 @@ namespace JourneyToTheMysticCave_Beta
             
             switch(hurtByWhat)
             {
-                case "Trap":
+                case "Trap": 
                     hurtByTrap = true; break;
                 case "Attacked":
                     hurt = true; break;

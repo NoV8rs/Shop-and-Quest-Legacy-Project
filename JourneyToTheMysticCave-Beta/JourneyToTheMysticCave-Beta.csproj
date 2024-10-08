@@ -66,6 +66,8 @@
     <Compile Include="Enemy\Ranger.cs" />
     <Compile Include="Items\Trap.cs" />
     <Compile Include="GameStats.cs" />
+    <Compile Include="Quest System.cs" />
+    <Compile Include="Quest.cs" />
     <Compile Include="_GameManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

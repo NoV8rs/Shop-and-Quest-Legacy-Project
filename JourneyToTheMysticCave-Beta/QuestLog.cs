@@ -12,11 +12,11 @@ namespace JourneyToTheMysticCave_Beta
             quests.Add(quest);
         }
 
-        public void RegisterKill(string enemyType)
+        public void RegisterKill(string enemyType, int enemyHealth)
         {
             foreach (var quest in quests)
             {
-                quest.RegisterKill(enemyType);
+                quest.RegisterKill(enemyType, enemyHealth);
             }
         }
 

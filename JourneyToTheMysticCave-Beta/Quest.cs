@@ -19,9 +19,9 @@
             EnemyType = enemyType;
         }
 
-        public void RegisterKill(string enemyType)
+        public void RegisterKill(string enemyType, int enemyHealth)
         {
-            if (!IsComplete && enemyType == EnemyType)
+            if (!IsComplete && enemyType == EnemyType && enemyHealth <= 0)
             {
                 KillCount++;
                 if (KillCount >= KillTarget)

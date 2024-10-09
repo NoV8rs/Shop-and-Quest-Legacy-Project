@@ -58,7 +58,7 @@ namespace JourneyToTheMysticCave_Beta
             gameStats.Init(levelManager, map);
             player.Init(map, gameStats, legendColors, enemyManager, levelManager, itemManager);
             legendColors.Init(gameStats, map, levelManager);
-            enemyManager.Init(gameStats, levelManager, legendColors, gamelog, player, map);
+            enemyManager.Init(gameStats, levelManager, legendColors, gamelog, player, map, questLog);
             itemManager.Init(gameStats, levelManager, legendColors, gamelog, player, map, enemyManager);
             gamelog.Init(player, enemyManager, itemManager, gameStats, map);
             hUD.Init(player, enemyManager, itemManager, map, legendColors, questLog);

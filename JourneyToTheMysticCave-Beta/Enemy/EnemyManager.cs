@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,7 +26,7 @@ namespace JourneyToTheMysticCave_Beta
             enemies = new List<Enemy>();
         }
 
-        public void Init(GameStats stats, LevelManager levelManager, LegendColors legendColors, Gamelog log, Player player, Map map)
+        public void Init(GameStats stats, LevelManager levelManager, LegendColors legendColors, Gamelog log, Player player, Map map, QuestLog questLog)
         {
             this.stats = stats;
             this.levelManager = levelManager;
@@ -74,8 +75,10 @@ namespace JourneyToTheMysticCave_Beta
 
         public void Update()
         {
-            foreach (Enemy enemy in enemies)
+            for (int i = enemies.Count - 1; i >= 0; i--)
             {
+                Enemy enemy = enemies[i];
+
                 if (levelManager.mapLevel == 0 && enemy.GetType().Name == nameof(Ranger))
                 {
                     enemy.Update(random);
@@ -97,6 +100,14 @@ namespace JourneyToTheMysticCave_Beta
                         }
                         enemy.Update(random);
                     }
+                }
+
+                if (enemy.IsAlive == false)
+                {
+                    enemy.IsAlive = true;
+                    string enemyType = enemy.GetType().Name;
+                    questLog.RegisterKill(enemyType, enemy.healthSystem.health);
+                    enemies.RemoveAt(i); // Remove the dead enemy from the list
                 }
             }
         }

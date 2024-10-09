@@ -60,13 +60,13 @@
     <Compile Include="Level\Map.cs" />
     <Compile Include="Enemy\Melee.cs" />
     <Compile Include="Items\Money.cs" />
+    <Compile Include="MeleeEnemyKillQuest.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Point2D.cs" />
     <Compile Include="Items\Potion.cs" />
     <Compile Include="Enemy\Ranger.cs" />
     <Compile Include="Items\Trap.cs" />
     <Compile Include="GameStats.cs" />
-    <Compile Include="Quest System.cs" />
     <Compile Include="Quest.cs" />
     <Compile Include="QuestLog.cs" />
     <Compile Include="_GameManager.cs" />

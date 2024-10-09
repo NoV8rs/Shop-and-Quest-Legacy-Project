@@ -13,18 +13,19 @@ namespace JourneyToTheMysticCave_Beta
         ItemManager itemManager;
         LegendColors legendColors;
         Map map;
+        QuestLog questLog;
         int columnCount;
         int rowCount;
         string health;
 
-
-        public void Init(Player player, EnemyManager enemyManager, ItemManager itemManager, Map map, LegendColors legendColors)
+        public void Init(Player player, EnemyManager enemyManager, ItemManager itemManager, Map map, LegendColors legendColors, QuestLog questLog)
         {
             this.player = player;
             this.enemyManager = enemyManager;
             this.itemManager = itemManager;
             this.map = map;
             this.legendColors = legendColors;
+            this.questLog = questLog;
         }
 
         public void Update()
@@ -70,6 +71,7 @@ namespace JourneyToTheMysticCave_Beta
             }
             Console.WriteLine();
             Console.WriteLine("+-------------------------------+");
+            questLog.DisplayLog();
         }
 
         private string EnemyName()

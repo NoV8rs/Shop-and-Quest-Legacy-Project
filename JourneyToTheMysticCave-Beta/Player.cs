@@ -58,7 +58,7 @@ namespace JourneyToTheMysticCave_Beta
             Movement();
         }
 
-        public void Draw()
+        public void Draw() // 
         {
             Console.SetCursorPosition(pos.x, pos.y);
 
@@ -73,25 +73,25 @@ namespace JourneyToTheMysticCave_Beta
             Console.CursorVisible = false;
         }
 
-        private void Movement()
+        private void Movement() // Player Movement
         {
-            if (!healthSystem.mapDead)
+            if (!healthSystem.mapDead) // If player is alive
             {
-                PlayerInput();
+                PlayerInput(); // Get player input
 
-                int newX = pos.x + dirX;
-                int newY = pos.y + dirY;
+                int newX = pos.x + dirX; // New X position
+                int newY = pos.y + dirY; // New Y position
 
-                if (CheckBoundaries(newX, newY))
+                if (CheckBoundaries(newX, newY)) // Check if player is within boundaries
                 {
-                    lastEncountered = GetEnemyAtPosition(newX, newY);
-                    if (lastEncountered != null)
-                        AttackEnemy(lastEncountered);
-                    if(!attackedEnemy)
+                    lastEncountered = GetEnemyAtPosition(newX, newY); // Get enemy at new position
+                    if (lastEncountered != null) // If enemy is at new position
+                        AttackEnemy(lastEncountered); // Attack enemy
+                    if(!attackedEnemy) // If player didn't attack enemy
                     {
-                        CheckFloor(newX, newY);
+                        CheckFloor(newX, newY); // Check if player is on floor
                     }
-                    attackedEnemy = false;
+                    attackedEnemy = false; // Reset attacked enemy
                 }
             }
         }

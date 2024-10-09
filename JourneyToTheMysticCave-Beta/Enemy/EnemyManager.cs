@@ -13,6 +13,7 @@ namespace JourneyToTheMysticCave_Beta
         LegendColors legendColors;
         Gamelog log;
         Player player;
+        QuestLog questLog;
         Random random = new Random();
         Map map;
         public List<Enemy> enemies;
@@ -32,6 +33,7 @@ namespace JourneyToTheMysticCave_Beta
             this.log = log;
             this.player = player;
             this.map = map;
+            this.questLog = questLog;
 
             for (int i = 0; i < stats.RangerCount; i++)
                 enemies.Add(new Ranger(stats.RangerCount, stats.RangedCharacter, stats.RangerName, stats.RangerDamage, stats.RangerAttack, legendColors, player, log, this, map, stats));

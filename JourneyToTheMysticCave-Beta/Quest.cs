@@ -2,32 +2,33 @@
 {
     public class Quest
     {
-        public string questName { get; set; }
-        public string questDescription { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
         public int KillCount { get; set; }
-        public int KillGoal { get; set; }
-        public bool questComplete { get; set; }
-        
-        public Quest(string questName, string questDescription, int killCount, int killGoal, bool questComplete)
+        public int KillTarget { get; set; }
+        public bool IsComplete { get; set; }
+        public string EnemyType { get; set; }
+
+        public Quest(string name, string description, int killTarget, string enemyType)
         {
-            this.questName = questName;
-            this.questDescription = questDescription;
-            this.KillCount = killCount;
-            this.KillGoal = killGoal;
-            this.questComplete = questComplete;
+            Name = name;
+            Description = description;
+            KillTarget = killTarget;
+            KillCount = 0;
+            IsComplete = false;
+            EnemyType = enemyType;
         }
-        
-        public void Update()
+
+        public void RegisterKill(string enemyType)
         {
-            if (!questComplete)
+            if (!IsComplete && enemyType == EnemyType)
             {
-                if (KillCount >= KillGoal)
+                KillCount++;
+                if (KillCount >= KillTarget)
                 {
-                    questComplete = true;
+                    IsComplete = true;
                 }
             }
         }
-        
-        
     }
 }

@@ -10,6 +10,7 @@ namespace JourneyToTheMysticCave_Beta
     internal class _GameManager
     {
         #region Declarations
+
         Map map = new Map();
         GameStats gameStats = new GameStats();
         Gamelog gamelog = new Gamelog();
@@ -19,9 +20,12 @@ namespace JourneyToTheMysticCave_Beta
         HUD hUD = new HUD();
         EnemyManager enemyManager = new EnemyManager();
         ItemManager itemManager = new ItemManager();
+        QuestLog questLog = new QuestLog();
+        MeleeEnemyKillQuest meleeQuest = new MeleeEnemyKillQuest();
 
         bool gameOver = false;
         bool playerWon = false;
+
         #endregion
 
         public _GameManager()
@@ -43,7 +47,7 @@ namespace JourneyToTheMysticCave_Beta
                 Draw();
                 CheckGameOver();
             }
-            Console.SetCursorPosition(0, 35);
+            Console.SetCursorPosition(10, 75);
             EndGame();
         }
 
@@ -57,7 +61,8 @@ namespace JourneyToTheMysticCave_Beta
             enemyManager.Init(gameStats, levelManager, legendColors, gamelog, player, map);
             itemManager.Init(gameStats, levelManager, legendColors, gamelog, player, map, enemyManager);
             gamelog.Init(player, enemyManager, itemManager, gameStats, map);
-            hUD.Init(player, enemyManager, itemManager, map, legendColors);
+            hUD.Init(player, enemyManager, itemManager, map, legendColors, questLog);
+            questLog.AddQuest(meleeQuest); // Add the melee quest to the quest log
         }
 
         private void Update()
@@ -150,3 +155,4 @@ namespace JourneyToTheMysticCave_Beta
         }
     }
 }
+    

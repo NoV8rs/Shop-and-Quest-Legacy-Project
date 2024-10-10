@@ -17,6 +17,8 @@ namespace JourneyToTheMysticCave_Beta
         public string enemyAttack;
         int columnCount = 0;
         int rowCount = 0;
+        
+        private List<string> messages = new List<string>();
 
         public void Init(Player player, EnemyManager enemyManager, ItemManager itemManager, GameStats gamestats, Map map)
         {
@@ -50,6 +52,20 @@ namespace JourneyToTheMysticCave_Beta
             LogTrap();
             LogPickUp();
             LogEnemyDeath();
+        }
+        
+        public void AddMessage(string message)
+        {
+            messages.Add(message);
+            Console.WriteLine(message);
+        }
+
+        public void Displaylog()
+        {
+            foreach (var message in messages)
+            {
+                Console.WriteLine(message);
+            }
         }
 
         #region PickUps

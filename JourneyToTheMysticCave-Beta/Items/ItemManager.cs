@@ -37,9 +37,9 @@ namespace JourneyToTheMysticCave_Beta
             this.map = map;
             this.enemyManager = enemyManager;
 
-            DistributeItems(1, 2, 1, 0, 0);
-            DistributeItems(2, 2, 1, 5, 1);
-            DistributeItems(3, 2, 1, 25, 2);
+            DistributeItems(1, 2, 1, 0, 0); // The first level has 1 potion, 2 money, 1 sword, and 0 traps, changed for shops
+            DistributeItems(2, 2, 1, 5, 1); // The second level has 2 potions, 2 money, 1 sword, and 5 traps
+            DistributeItems(3, 2, 1, 25, 2); // The third level has 3 potions, 2 money, 1 sword, and 25 traps
         }
 
         public void Update()
@@ -85,16 +85,16 @@ namespace JourneyToTheMysticCave_Beta
             return items.Where(item => item is Money).All(money => money.collected);
         }
 
-        private void DistributeItems(int potionCount, int moneyCount, int swordCount, int trapCount, int level)
+        private void DistributeItems(int potionCount, int moneyCount, int swordCount, int trapCount, int level) // Changed for shops
         {
             int index = items.Count;
 
             // Distribute potions
             for (int i = 0; i < potionCount; i++)
             {
-                var potion = new Potion(stats.PotionCount, stats.PotionCharacter, stats.PotionName, stats.PotionHeal, legendColors, player);
-                potion.pos = stats.PlaceCharacters(level, random);
-                items.Add(potion);
+                var potion = new Potion(stats.PotionCount, stats.PotionCharacter, stats.PotionName, stats.PotionHeal, legendColors, player); // The potion is created with the stats from the GameStats class
+                potion.pos = stats.PlaceCharacters(level, random); // The potion is placed in a random position
+                items.Add(potion); // The potion is added to the items list, and caps the number of potions to the potionCount
             }
 
             // Distribute money

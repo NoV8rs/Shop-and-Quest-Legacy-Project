@@ -9,14 +9,16 @@ namespace JourneyToTheMysticCave_Beta
 {
     internal class Map
     {
-        //game entities
+        // Game entities
         public LevelManager levelManager;
         public LegendColors legendColors;
         Player player;
         EnemyManager enemyManager;
         ItemManager itemManager;
         bool firstPlay = true;
-        char[,] currentMap;
+        private char[,] currentMap;
+        private List<Shop> shops = new List<Shop>();
+        private Random random = new Random();
 
         public void Init(LevelManager levelManager, LegendColors legendColors, Player player, EnemyManager enemyManager, ItemManager itemManager)
         {
@@ -25,11 +27,17 @@ namespace JourneyToTheMysticCave_Beta
             this.player = player;
             this.enemyManager = enemyManager;
             this.itemManager = itemManager;
+
+            // Initialize currentMap
+            currentMap = GetCurrentMapContent();
+
+            // Place a single shop
+            PlaceSingleShop();
         }
 
         public void Update()
         {
-            if (firstPlay || levelManager.levelChange) // only updates if levelchange has been triggered or first play.
+            if (firstPlay || levelManager.levelChange) // Only updates if level change has been triggered or first play.
             {
                 currentMap = GetCurrentMapContent();
                 firstPlay = false;
@@ -53,6 +61,7 @@ namespace JourneyToTheMysticCave_Beta
                 Console.WriteLine();
             }
         }
+
         public int GetMapRowCount()
         {
             return currentMap.GetLength(0);
@@ -120,6 +129,24 @@ namespace JourneyToTheMysticCave_Beta
                 }
             }
             return true;
+        }
+
+        private void PlaceSingleShop()
+        {
+            int x, y;
+            do
+            {
+                x = random.Next(GetMapColumnCount());
+                y = random.Next(GetMapRowCount());
+            } while (!EmptySpace(x, y, levelManager.mapLevel));
+
+            shops.Add(new Shop(new Point2D { x = x, y = y }));
+            currentMap[y, x] = 'S'; // Mark the shop position on the map
+        }
+
+        public List<Shop> GetShops()
+        {
+            return shops;
         }
     }
 }

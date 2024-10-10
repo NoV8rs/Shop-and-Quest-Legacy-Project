@@ -8,7 +8,7 @@ namespace JourneyToTheMysticCave_Beta
 {
     internal class GameObject
     {
-        public Point2D pos;
+        public Point2D pos {get; set;}
         public char character;
         public string name;
     }

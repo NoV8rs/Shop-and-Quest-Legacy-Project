@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Input;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,6 +15,7 @@ namespace JourneyToTheMysticCave_Beta
         int dirY;
         bool inDeep = false;
         int moveCount;
+        public Point2D pos { get; set; }
 
         public bool attackedEnemy = false;
         public bool itemPickedUp = false;
@@ -30,6 +32,8 @@ namespace JourneyToTheMysticCave_Beta
         LegendColors legendColors;
         LevelManager levelManager;
         ItemManager itemManager;
+        ShopManager shopManager;
+        List<Shop> _shops;
 
 
         public Player()
@@ -37,7 +41,7 @@ namespace JourneyToTheMysticCave_Beta
             healthSystem = new HealthSystem();
         }
 
-        public void Init(Map map, GameStats gameStats, LegendColors legendColors, EnemyManager enemyManager, LevelManager levelManager, ItemManager itemManager)
+        public void Init(Map map, GameStats gameStats, LegendColors legendColors, EnemyManager enemyManager, LevelManager levelManager, ItemManager itemManager, List<Shop> shops)
         {
             this.map = map;
             this.gameStats = gameStats;
@@ -45,6 +49,9 @@ namespace JourneyToTheMysticCave_Beta
             this.enemyManager = enemyManager;
             this.levelManager = levelManager;
             this.itemManager = itemManager;
+            this._shops = shops;
+            this.shopManager = new ShopManager();
+            shopManager.Init(gameStats, legendColors, this, map);
 
             healthSystem.health = gameStats.PlayerHealth;
             character = gameStats.PlayerCharacter;
@@ -58,8 +65,13 @@ namespace JourneyToTheMysticCave_Beta
             Movement();
         }
 
-        public void Draw() // 
+        public void Draw()
         {
+            if (pos.Equals(default(Point2D)) || healthSystem == null || map == null || legendColors == null)
+            {
+                throw new NullReferenceException("Player position, health system, map, or legend colors are not initialized.");
+            }
+
             Console.SetCursorPosition(pos.x, pos.y);
 
             legendColors.MapColor(character);
@@ -90,6 +102,7 @@ namespace JourneyToTheMysticCave_Beta
                     if(!attackedEnemy) // If player didn't attack enemy
                     {
                         CheckFloor(newX, newY); // Check if player is on floor
+                        CheckShop(newX, newY); // Check if player is on shop
                     }
                     attackedEnemy = false; // Reset attacked enemy
                 }
@@ -134,6 +147,17 @@ namespace JourneyToTheMysticCave_Beta
                 }
             }
             return null;
+        }
+
+        private void CheckShop(int x, int y)
+        {
+            foreach (var shop in shopManager.GetShops())
+            {
+                if (shop.pos.x == x && shop.pos.y == y)
+                {
+                    shop.Interact(this, new Gamelog(), gameStats);
+                }
+            }
         }
 
         private void AttackEnemy(Enemy enemy)

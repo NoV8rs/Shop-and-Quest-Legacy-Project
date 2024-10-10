@@ -8,10 +8,13 @@ namespace JourneyToTheMysticCave_Beta
 {
     internal class Program
     {
-        static _GameManager gameManager = new _GameManager();
-
         static void Main(string[] args)
         {
+            Player player = new Player();
+            Gamelog gamelog = new Gamelog();
+            List<Shop> shops = new List<Shop>();
+            _GameManager gameManager = new _GameManager(shops);
+
             gameManager.Gameplay();
         }
     }

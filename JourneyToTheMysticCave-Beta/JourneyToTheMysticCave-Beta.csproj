@@ -52,7 +52,10 @@
     <Compile Include="HealthSystem.cs" />
     <Compile Include="HUD.cs" />
     <Compile Include="Items\Item.cs" />
+    <Compile Include="Items\ItemBrought.cs" />
     <Compile Include="Items\ItemManager.cs" />
+    <Compile Include="Items\Shop.cs" />
+    <Compile Include="Items\ShopManager.cs" />
     <Compile Include="Items\Sword.cs" />
     <Compile Include="Level\LegendColors.cs" />
     <Compile Include="Level\LevelManager.cs" />

@@ -88,6 +88,13 @@ namespace JourneyToTheMysticCave_Beta
         public string SwordName { get; set; }
         public int SwordMultiplier { get; set; }
         #endregion
+        
+        #region ShopStat Declarations
+        public int ShopCount { get; set; }
+        public char ShopCharacter { get; set; }
+        public string ShopName { get; set; }
+        
+        #endregion
 
         public int PoisonDamage;
 
@@ -166,6 +173,12 @@ namespace JourneyToTheMysticCave_Beta
             SwordCharacter = 't';
             SwordName = "Sword";
             SwordMultiplier = 10;
+            
+            // Shop Configs
+            ShopCount = 1;
+            ShopCharacter = 'S';
+            ShopName = "Shop";
+            
 
             // Floor Damage
             PoisonDamage = 5;

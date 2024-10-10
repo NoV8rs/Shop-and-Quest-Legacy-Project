@@ -22,15 +22,18 @@ namespace JourneyToTheMysticCave_Beta
         ItemManager itemManager = new ItemManager();
         QuestLog questLog = new QuestLog();
         MeleeEnemyKillQuest meleeQuest = new MeleeEnemyKillQuest();
+        private List<Shop> _shops;
+        ShopManager shopManager = new ShopManager();
 
         bool gameOver = false;
         bool playerWon = false;
 
         #endregion
 
-        public _GameManager()
+        public _GameManager(List<Shop> shop)
         {
             Init();
+            this._shops = shop;
         }
 
         public void Gameplay()
@@ -56,15 +59,19 @@ namespace JourneyToTheMysticCave_Beta
             levelManager.Init(player);
             map.Init(levelManager, legendColors, player, enemyManager, itemManager);
             gameStats.Init(levelManager, map);
-            player.Init(map, gameStats, legendColors, enemyManager, levelManager, itemManager);
+            player.Init(map, gameStats, legendColors, enemyManager, levelManager, itemManager, _shops);
             legendColors.Init(gameStats, map, levelManager);
             enemyManager.Init(gameStats, levelManager, legendColors, gamelog, player, map, questLog);
             itemManager.Init(gameStats, levelManager, legendColors, gamelog, player, map, enemyManager);
             gamelog.Init(player, enemyManager, itemManager, gameStats, map);
             hUD.Init(player, enemyManager, itemManager, map, legendColors, questLog);
+            shopManager.Init(gameStats, legendColors, player, map);
             questLog.AddQuest(meleeQuest); // Add the melee quest to the quest log
-        }
 
+            _shops = new List<Shop>();
+            
+        }
+        
         private void Update()
         {
             player.Update();
@@ -75,6 +82,8 @@ namespace JourneyToTheMysticCave_Beta
             itemManager.Update();
             hUD.Update();
             gamelog.Update();
+            shopManager.Update();
+            CheckPlayerShopInteraction();
         }
 
         private void Draw()
@@ -86,6 +95,7 @@ namespace JourneyToTheMysticCave_Beta
             enemyManager.Draw();
             hUD.Draw();
             gamelog.Draw();
+            shopManager.Draw();
         }
 
         void TutorialText()
@@ -152,6 +162,17 @@ namespace JourneyToTheMysticCave_Beta
                 input = Console.ReadKey();
             }
             System.Environment.Exit(0);
+        }
+        
+        private void CheckPlayerShopInteraction()
+        {
+            foreach (var shop in _shops)
+            {
+                if (player.pos.x == shop.pos.x && player.pos.y == shop.pos.y)
+                {
+                    shop.Interact(player, new Gamelog(), gameStats);
+                }
+            }
         }
     }
 }

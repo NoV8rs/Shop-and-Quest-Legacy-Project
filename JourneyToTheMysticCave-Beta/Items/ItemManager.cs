@@ -14,9 +14,11 @@ namespace JourneyToTheMysticCave_Beta
         LegendColors legendColors;
         LevelManager levelManager;
         EnemyManager enemyManager;
+        GameStats g;
         Gamelog log;
         Player player;
         Map map;
+        GameStats gameStats;
         Random random = new Random();
 
         public int itemsLevel0;
@@ -100,7 +102,7 @@ namespace JourneyToTheMysticCave_Beta
             // Distribute money
             for (int i = 0; i < moneyCount; i++)
             {
-                var money = new Money(stats.MoneyCount, stats.MoneyCharacter, stats.MoneyName, legendColors, player);
+                var money = new Money(stats.MoneyCount, stats.MoneyCharacter, stats.MoneyName, stats.MoneyValue,g, legendColors, player);
                 money.pos = stats.PlaceCharacters(level, random);
                 items.Add(money);
             }
@@ -108,7 +110,7 @@ namespace JourneyToTheMysticCave_Beta
             // Distribute swords
             for (int i = 0; i < swordCount; i++)
             {
-                var sword = new Sword(stats.SwordCount, stats.SwordCharacter, stats.SwordName, stats.SwordMultiplier, legendColors, player);
+                var sword = new Sword(stats.SwordCount, stats.SwordCharacter, stats.SwordName, stats.SwordMultiplier, legendColors, player, gameStats );
                 sword.pos = stats.PlaceCharacters(level, random);
                 items.Add(sword);
             }
@@ -116,7 +118,7 @@ namespace JourneyToTheMysticCave_Beta
             // Distribute traps
             for (int i = 0; i < trapCount; i++)
             {
-                var trap = new Trap(stats.TrapCount, stats.TrapCharacter, stats.TrapName, stats.TrapDamage, legendColors, player, enemyManager, levelManager);
+                var trap = new Trap(stats.TrapCount, stats.TrapCharacter, stats.TrapName, stats.TrapDamage, legendColors, player, enemyManager, levelManager, gameStats);
                 trap.pos = stats.PlaceCharacters(level, random);
                 items.Add(trap);
             }

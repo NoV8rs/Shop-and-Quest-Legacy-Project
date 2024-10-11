@@ -23,10 +23,6 @@ namespace JourneyToTheMysticCave_Beta
                 effect(player);
                 log.AddMessage($"Bought {Name} for {Price} money.");
             }
-            else
-            {
-                //log.AddMessage($"Not enough money to buy {Name}. It costs {Price} money.");
-            }
         }
     }
 }

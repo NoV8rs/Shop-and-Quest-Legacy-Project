@@ -13,6 +13,7 @@ namespace JourneyToTheMysticCave_Beta
         LevelManager levelManager;
         Random random = new Random();
         Map map;
+        Item item;
 
         #region PlayerStat Declarations
         public string PlayerName { get; set; }
@@ -66,6 +67,8 @@ namespace JourneyToTheMysticCave_Beta
         public int MoneyCount { get; set; }
         public char MoneyCharacter { get; set; }
         public string MoneyName { get; set; }
+        
+        public int MoneyValue { get; set; }
         #endregion
 
         #region PotionStat Declarations
@@ -98,10 +101,11 @@ namespace JourneyToTheMysticCave_Beta
 
         public int PoisonDamage;
 
-        public void Init(LevelManager levelManager, Map map)
+        public void Init(LevelManager levelManager, Map map, Item item)
         {
             this.levelManager = levelManager;
             this.map = map;
+            this.item = item;
 
             GameConfig();
         }
@@ -155,7 +159,8 @@ namespace JourneyToTheMysticCave_Beta
             MoneyCount = 10;
             MoneyCharacter = '$';
             MoneyName = "Money";
-
+            MoneyValue = 1;
+            
             // Potion Configs
             PotionCount = 6;
             PotionName = "Potion";

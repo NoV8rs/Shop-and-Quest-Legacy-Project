@@ -11,7 +11,7 @@ namespace JourneyToTheMysticCave_Beta
         public int healAmount;
 
         public Potion(int count, char character, string name, int healAmount, LegendColors legendColors, Player player) : 
-            base(count, character, name, legendColors, player)
+            base(count, character, name, legendColors, player, null)
         {
             this.healAmount = healAmount;
         }

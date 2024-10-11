@@ -13,16 +13,17 @@ namespace JourneyToTheMysticCave_Beta
         public int count;
         public Player player;
         LegendColors legendColors;
+        GameStats gameStats;
 
-        public Item(int count, char character, string name, LegendColors legendColors, Player player)
+        public Item(int count, char character, string name, LegendColors legendColors, Player player, GameStats gameStats)
         {
             this.count = count;
             this.character = character;
             this.name = name;
             this.legendColors = legendColors;
             this.player = player;
+            this.gameStats = gameStats;
         }
-
         
         public virtual void Update() { }
 
@@ -46,6 +47,17 @@ namespace JourneyToTheMysticCave_Beta
                 collected = true;
                 pickedUp = true;
                 pos = new Point2D { x = 0, y = 0 };
+            }
+        }
+
+        public void MoneyCollected()
+        {
+            if (!collected)
+            {
+                collected = true;
+                pickedUp = true;
+                pos = new Point2D { x = 0, y = 0 };
+                gameStats.MoneyCount += count;
             }
         }
     }

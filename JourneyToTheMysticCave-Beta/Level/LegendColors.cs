@@ -76,6 +76,8 @@ namespace JourneyToTheMysticCave_Beta
             Console.SetCursorPosition(columnCount, rowCount++);
             DisplayChar('#', "Walls");
             Console.SetCursorPosition(columnCount, rowCount++);
+            DisplayChar('X', "Shop");
+            Console.SetCursorPosition(columnCount, rowCount++);
             Console.WriteLine("+------------------------+");
         }
 

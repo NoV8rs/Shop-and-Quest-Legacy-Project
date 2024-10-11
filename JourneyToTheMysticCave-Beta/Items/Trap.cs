@@ -12,8 +12,8 @@ namespace JourneyToTheMysticCave_Beta
         EnemyManager enemyManager;
         LevelManager levelManager;
 
-        public Trap(int count, char character, string name, int trapDamage, LegendColors legendColors,  Player player, EnemyManager enemyManager, LevelManager levelManager) : 
-            base(count, character, name, legendColors, player)
+        public Trap(int count, char character, string name, int trapDamage, LegendColors legendColors,  Player player, EnemyManager enemyManager, LevelManager levelManager, GameStats gameStats) : 
+            base(count, character, name, legendColors, player, gameStats)
         {
             this.trapDamage = trapDamage;
             this.enemyManager = enemyManager;

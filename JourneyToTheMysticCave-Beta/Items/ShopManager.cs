@@ -54,14 +54,6 @@ namespace JourneyToTheMysticCave_Beta
             }
         }
 
-        public void Draw()
-        {
-            foreach (var shop in shops)
-            {
-                shop.Draw();
-            }
-        }
-
         public List<Shop> GetShops()
         {
             return shops;

@@ -2,7 +2,7 @@
 {
     public class MeleeEnemyKillQuest : Quest
     {
-        public MeleeEnemyKillQuest() : base("Melee Enemy Slayer", "Kill 5 Enemies", 5, "Ranger")
+        public MeleeEnemyKillQuest() : base("Melee Enemy Slayer", "Kill 3 Enemies", 3, "Ranger")
         {
             
         }

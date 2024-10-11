@@ -20,6 +20,7 @@ namespace JourneyToTheMysticCave_Beta
         public bool attackedEnemy = false;
         public bool itemPickedUp = false;
         private Enemy lastEncountered;
+        public int money;
 
         public Enemy GetLastEnountered()
         {
@@ -60,6 +61,7 @@ namespace JourneyToTheMysticCave_Beta
             pos = gameStats.PlayerPos;
             damage = gameStats.PlayerDamage;
             name = gameStats.PlayerName;
+            money = gameStats.MoneyCount;
         }
 
         public void Update()

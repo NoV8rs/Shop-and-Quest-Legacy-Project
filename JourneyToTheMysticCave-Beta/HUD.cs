@@ -14,11 +14,12 @@ namespace JourneyToTheMysticCave_Beta
         LegendColors legendColors;
         Map map;
         QuestLog questLog;
+        GameStats gameStats;
         int columnCount;
         int rowCount;
         string health;
 
-        public void Init(Player player, EnemyManager enemyManager, ItemManager itemManager, Map map, LegendColors legendColors, QuestLog questLog)
+        public void Init(Player player, EnemyManager enemyManager, ItemManager itemManager, Map map, LegendColors legendColors, QuestLog questLog, GameStats gameStats)
         {
             this.player = player;
             this.enemyManager = enemyManager;
@@ -26,6 +27,7 @@ namespace JourneyToTheMysticCave_Beta
             this.map = map;
             this.legendColors = legendColors;
             this.questLog = questLog;
+            this.gameStats = gameStats;
         }
 
         public void Update()
@@ -58,6 +60,7 @@ namespace JourneyToTheMysticCave_Beta
             else
                 health = $"{EnemyHealth()}";
             Console.WriteLine($"Enemy Health - {health}");
+            Console.WriteLine("Money: " + gameStats.MoneyCount);
             Console.Write("Money Picked Up: ");
             foreach(Item item in itemManager.items)
             {

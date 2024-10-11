@@ -20,6 +20,7 @@ namespace JourneyToTheMysticCave_Beta
         bool firstPlay = true;
         private char[,] currentMap;
         private List<Shop> shops = new List<Shop>();
+        ShopManager shopManager = new ShopManager();
         private Random random = new Random();
 
         public void Init(LevelManager levelManager, LegendColors legendColors, Player player, EnemyManager enemyManager, ItemManager itemManager, Gamelog gamelog)
@@ -35,7 +36,7 @@ namespace JourneyToTheMysticCave_Beta
             currentMap = GetCurrentMapContent();
 
             // Place a single shop
-            PlaceSingleShop(0);
+            //PlaceSingleShop(0);
             PlaceSingleShop(1);
             PlaceSingleShop(2);
         }
@@ -48,7 +49,7 @@ namespace JourneyToTheMysticCave_Beta
                 firstPlay = false;
                 levelManager.levelChange = false;
 
-                CheckPlayerShopInteraction();
+                //CheckPlayerShopInteraction();
             }
         }
 
@@ -108,6 +109,12 @@ namespace JourneyToTheMysticCave_Beta
                 }
             }
 
+            foreach (Shop shop in shops)
+            {
+                if (shop.pos.x == x && shop.pos.y == y)
+                    return false;
+            }
+
             foreach (Item item in itemManager.items)
             {
                 switch (mapLevel)
@@ -145,10 +152,10 @@ namespace JourneyToTheMysticCave_Beta
             {
                 x = random.Next(GetMapColumnCount());
                 y = random.Next(GetMapRowCount());
-            } while (!EmptySpace(x, y, levelManager.mapLevel));
+            } while (!EmptySpace(x, y, mapLevel));
             
             Shop shop = new Shop(new Point2D { x = x, y = y });
-            //shops.Add(shop);
+            shops.Add(shop);
             
             levelManager.AllMapContents[mapLevel][y, x] = 'X';
         }
@@ -156,17 +163,6 @@ namespace JourneyToTheMysticCave_Beta
         public List<Shop> GetShops()
         {
             return shops;
-        }
-        
-        private void CheckPlayerShopInteraction()
-        {
-            foreach (var shop in shops)
-            {
-                if (player.pos.x == shop.pos.x && player.pos.y == shop.pos.y)
-                {
-                    shop.Interact(player, gamelog, gameStats, levelManager);
-                }
-            }
         }
     }
 }

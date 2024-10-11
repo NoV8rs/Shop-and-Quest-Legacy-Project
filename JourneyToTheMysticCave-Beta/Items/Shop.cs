@@ -26,6 +26,19 @@ namespace JourneyToTheMysticCave_Beta
             random = new Random();
             SelectRandomItem();
         }
+        
+        private Point2D AdjustPositionIfOnBorder(Point2D position, int mapWidth, int mapHeight)
+        {
+            int x = position.x;
+            int y = position.y;
+
+            if (x == 0) x = 1;
+            if (y == 0) y = 1;
+            if (x == mapWidth - 1) x = mapWidth - 2;
+            if (y == mapHeight - 1) y = mapHeight - 2;
+
+            return new Point2D { x = x, y = y };
+        }
 
         private void SelectRandomItem()
         {
@@ -54,16 +67,6 @@ namespace JourneyToTheMysticCave_Beta
                         log.AddMessage($"Not enough money to buy {currentItem.Name}. It costs {currentItem.Price} coins.");
                     }
                 }
-            }
-        }
-
-        public void Draw()
-        {
-            if (!itemSold) // This is for the shop text
-            {
-                gamelog.AddMessage($"Shop available at position ({pos.x}, {pos.y}).");
-                //Console.SetCursorPosition(pos.x, pos.y); // This is for the shop text
-                //Console.Write("g");
             }
         }
     }

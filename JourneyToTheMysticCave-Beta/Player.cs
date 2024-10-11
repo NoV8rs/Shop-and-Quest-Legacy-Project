@@ -34,6 +34,7 @@ namespace JourneyToTheMysticCave_Beta
         ItemManager itemManager;
         ShopManager shopManager;
         List<Shop> _shops;
+        Gamelog gamelog;
 
 
         public Player()
@@ -41,7 +42,7 @@ namespace JourneyToTheMysticCave_Beta
             healthSystem = new HealthSystem();
         }
 
-        public void Init(Map map, GameStats gameStats, LegendColors legendColors, EnemyManager enemyManager, LevelManager levelManager, ItemManager itemManager, List<Shop> shops)
+        public void Init(Map map, GameStats gameStats, LegendColors legendColors, EnemyManager enemyManager, LevelManager levelManager, ItemManager itemManager, List<Shop> shops, Gamelog gamelog)
         {
             this.map = map;
             this.gameStats = gameStats;
@@ -51,6 +52,7 @@ namespace JourneyToTheMysticCave_Beta
             this.itemManager = itemManager;
             this._shops = shops;
             this.shopManager = new ShopManager();
+            this.gamelog = gamelog;
             shopManager.Init(gameStats, legendColors, this, map);
 
             healthSystem.health = gameStats.PlayerHealth;
@@ -155,7 +157,7 @@ namespace JourneyToTheMysticCave_Beta
             {
                 if (shop.pos.x == x && shop.pos.y == y)
                 {
-                    shop.Interact(this, new Gamelog(), gameStats);
+                    shop.Interact(this, gamelog, gameStats, levelManager);
                 }
             }
         }

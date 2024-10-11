@@ -11,9 +11,11 @@ namespace JourneyToTheMysticCave_Beta
         private Player player;
         private Map map;
         private Random random = new Random();
+        Gamelog gamelog;
 
         public ShopManager()
         {
+            this.gamelog = gamelog;
             shops = new List<Shop>();
         }
 
@@ -23,12 +25,24 @@ namespace JourneyToTheMysticCave_Beta
             this.legendColors = legendColors;
             this.player = player;
             this.map = map;
+            shops = new List<Shop>();
+
+            HashSet<(int, int)> usedPositions = new HashSet<(int, int)>();
 
             for (int i = 0; i < gameStats.ShopCount; i++)
             {
-                Point2D shopPosition = gameStats.PlaceCharacters(1, random);
+                int x, y;
+                do
+                {
+                    x = random.Next(map.GetMapColumnCount());
+                    y = random.Next(map.GetMapRowCount());
+                } while (usedPositions.Contains((x, y)) || !map.EmptySpace(x, y, gameStats.ShopCharacter));
+
+                usedPositions.Add((x, y));
+                Point2D shopPosition = new Point2D { x = x, y = y };
                 Shop shop = new Shop(shopPosition);
                 shops.Add(shop);
+                map.GetCurrentMapContent()[shopPosition.y, shopPosition.x] = gameStats.ShopCharacter;
             }
         }
 

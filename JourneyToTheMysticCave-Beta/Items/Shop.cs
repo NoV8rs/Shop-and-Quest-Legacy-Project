@@ -6,8 +6,13 @@ namespace JourneyToTheMysticCave_Beta
     {
         private ItemBrought[] items;
         private ItemBrought currentItem;
+        GameStats gameStats = new GameStats();
         private Random random;
         private bool itemSold;
+        
+        private Gamelog gamelog = new Gamelog();
+        
+        //wpublic Point2D pos { get; set; }
 
         public Shop(Point2D position)
         {
@@ -31,7 +36,7 @@ namespace JourneyToTheMysticCave_Beta
             }
         }
 
-        public void Interact(Player player, Gamelog log, GameStats gameStats)
+        public void Interact(Player player, Gamelog log, GameStats gameStats, LevelManager levelManager)
         {
             if (currentItem != null && !itemSold)
             {
@@ -39,8 +44,15 @@ namespace JourneyToTheMysticCave_Beta
                 ConsoleKeyInfo keyInfo = Console.ReadKey(true);
                 if (keyInfo.Key == ConsoleKey.Y)
                 {
-                    currentItem.BuyItem(player, log, gameStats);
-                    itemSold = true;
+                    if (gameStats.MoneyCount >= currentItem.Price)
+                    {
+                        currentItem.BuyItem(player, log, gameStats);
+                        itemSold = true;
+                    }
+                    else
+                    {
+                        log.AddMessage($"Not enough money to buy {currentItem.Name}. It costs {currentItem.Price} coins.");
+                    }
                 }
                 else
                 {
@@ -51,10 +63,11 @@ namespace JourneyToTheMysticCave_Beta
 
         public void Draw()
         {
-            if (!itemSold)
+            if (!itemSold) // This is for the shop text
             {
-                Console.SetCursorPosition(pos.x, pos.y);
-                Console.Write('S');
+                gamelog.AddMessage($"Shop available at position ({pos.x}, {pos.y}).");
+                //Console.SetCursorPosition(pos.x, pos.y); // This is for the shop text
+                //Console.Write("g");
             }
         }
     }

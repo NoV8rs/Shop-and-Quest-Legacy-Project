@@ -13,6 +13,7 @@ namespace JourneyToTheMysticCave_Beta
         public ItemManager itemManager;
         public GameStats gameStats;
         public Map map;
+        public QuestLog questLog;
 
         public string enemyAttack;
         int columnCount = 0;
@@ -40,6 +41,15 @@ namespace JourneyToTheMysticCave_Beta
                 Console.Write(new string(' ', Console.WindowWidth));
             }
         }
+        
+        public void LogQuestStatus()
+        {
+            foreach (var quest in questLog.GetQuests())
+            {
+                string status = quest.IsComplete ? "Completed" : $"{quest.KillCount}/{quest.KillTarget} kills";
+                Console.WriteLine($"{quest.Name}: {quest.Description} - {status}");
+            }
+        }
 
         public void Draw()
         {
@@ -59,13 +69,18 @@ namespace JourneyToTheMysticCave_Beta
             messages.Add(message);
             Console.WriteLine(message);
         }
-
-        public void Displaylog()
+        
+        //public void Displaylog()
+        //{
+         //   foreach (var message in messages)
+          //  {
+           //     Console.WriteLine(message);
+            //}
+        //}
+        
+        public List<string> GetMessages()
         {
-            foreach (var message in messages)
-            {
-                Console.WriteLine(message);
-            }
+            return messages;
         }
 
         #region PickUps

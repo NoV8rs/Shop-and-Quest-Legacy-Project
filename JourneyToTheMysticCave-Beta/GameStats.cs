@@ -175,8 +175,8 @@ namespace JourneyToTheMysticCave_Beta
             SwordMultiplier = 10;
             
             // Shop Configs
-            ShopCount = 1;
-            ShopCharacter = 'S';
+            ShopCount = 3;
+            ShopCharacter = 'X';
             ShopName = "Shop";
             
 

@@ -28,5 +28,10 @@ namespace JourneyToTheMysticCave_Beta
                 Console.WriteLine($"{quest.Name}: {quest.Description} - {status}");
             }
         }
+        
+        public List<Quest> GetQuests()
+        {
+            return quests;
+        }
     }
 }

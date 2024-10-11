@@ -140,6 +140,10 @@ namespace JourneyToTheMysticCave_Beta
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.BackgroundColor = ConsoleColor.DarkGreen;
                     break;
+                case 'X': // Shop
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.BackgroundColor = ConsoleColor.DarkYellow;
+                    break;
             }
         }
     }

@@ -15,24 +15,29 @@ namespace JourneyToTheMysticCave_Beta
         Player player;
         EnemyManager enemyManager;
         ItemManager itemManager;
+        Gamelog gamelog;
+        GameStats gameStats;
         bool firstPlay = true;
         private char[,] currentMap;
         private List<Shop> shops = new List<Shop>();
         private Random random = new Random();
 
-        public void Init(LevelManager levelManager, LegendColors legendColors, Player player, EnemyManager enemyManager, ItemManager itemManager)
+        public void Init(LevelManager levelManager, LegendColors legendColors, Player player, EnemyManager enemyManager, ItemManager itemManager, Gamelog gamelog)
         {
             this.levelManager = levelManager;
             this.legendColors = legendColors;
             this.player = player;
             this.enemyManager = enemyManager;
             this.itemManager = itemManager;
+            this.gamelog = gamelog;
 
             // Initialize currentMap
             currentMap = GetCurrentMapContent();
 
             // Place a single shop
-            PlaceSingleShop();
+            PlaceSingleShop(0);
+            PlaceSingleShop(0);
+            PlaceSingleShop(0);
         }
 
         public void Update()
@@ -42,6 +47,8 @@ namespace JourneyToTheMysticCave_Beta
                 currentMap = GetCurrentMapContent();
                 firstPlay = false;
                 levelManager.levelChange = false;
+
+                CheckPlayerShopInteraction();
             }
         }
 
@@ -131,7 +138,7 @@ namespace JourneyToTheMysticCave_Beta
             return true;
         }
 
-        private void PlaceSingleShop()
+        public void PlaceSingleShop(int mapLevel)
         {
             int x, y;
             do
@@ -139,14 +146,27 @@ namespace JourneyToTheMysticCave_Beta
                 x = random.Next(GetMapColumnCount());
                 y = random.Next(GetMapRowCount());
             } while (!EmptySpace(x, y, levelManager.mapLevel));
-
-            shops.Add(new Shop(new Point2D { x = x, y = y }));
-            currentMap[y, x] = 'S'; // Mark the shop position on the map
+            
+            Shop shop = new Shop(new Point2D { x = x, y = y });
+            shops.Add(shop);
+            
+            levelManager.AllMapContents[mapLevel][y, x] = 'X';
         }
 
         public List<Shop> GetShops()
         {
             return shops;
+        }
+        
+        private void CheckPlayerShopInteraction()
+        {
+            foreach (var shop in shops)
+            {
+                if (player.pos.x == shop.pos.x && player.pos.y == shop.pos.y)
+                {
+                    shop.Interact(player, gamelog, gameStats, levelManager);
+                }
+            }
         }
     }
 }

@@ -24,6 +24,7 @@ namespace JourneyToTheMysticCave_Beta
         MeleeEnemyKillQuest meleeQuest = new MeleeEnemyKillQuest();
         private List<Shop> _shops;
         ShopManager shopManager = new ShopManager();
+        //ShopManager shopManagers = new ShopManager();
 
         bool gameOver = false;
         bool playerWon = false;
@@ -57,9 +58,9 @@ namespace JourneyToTheMysticCave_Beta
         private void Init()
         {
             levelManager.Init(player);
-            map.Init(levelManager, legendColors, player, enemyManager, itemManager);
+            map.Init(levelManager, legendColors, player, enemyManager, itemManager, gamelog);
             gameStats.Init(levelManager, map);
-            player.Init(map, gameStats, legendColors, enemyManager, levelManager, itemManager, _shops);
+            player.Init(map, gameStats, legendColors, enemyManager, levelManager, itemManager, _shops, gamelog);
             legendColors.Init(gameStats, map, levelManager);
             enemyManager.Init(gameStats, levelManager, legendColors, gamelog, player, map, questLog);
             itemManager.Init(gameStats, levelManager, legendColors, gamelog, player, map, enemyManager);
@@ -166,11 +167,11 @@ namespace JourneyToTheMysticCave_Beta
         
         private void CheckPlayerShopInteraction()
         {
-            foreach (var shop in _shops)
+            foreach (var shop in shopManager.GetShops())
             {
                 if (player.pos.x == shop.pos.x && player.pos.y == shop.pos.y)
                 {
-                    shop.Interact(player, new Gamelog(), gameStats);
+                    shop.Interact(player, gamelog, gameStats, levelManager);
                 }
             }
         }

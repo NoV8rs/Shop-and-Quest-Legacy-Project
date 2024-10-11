@@ -122,10 +122,12 @@ namespace JourneyToTheMysticCave_Beta
             DisplaySymbolsInColumns("Right", "D");
             DisplaySymbolsInColumns("Down-Right", "C");
             Console.WriteLine();
+            Console.WriteLine("Game must be played in full screen mode for best experience.");
             Console.WriteLine();
 
             Console.WriteLine("Press any key to continue");
             Console.ReadKey(true);
+            Console.Clear();
         }
 
         private void DisplaySymbolsInColumns(string direction, string description)

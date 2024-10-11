@@ -37,8 +37,8 @@ namespace JourneyToTheMysticCave_Beta
 
             // Place a single shop
             //PlaceSingleShop(0);
-            PlaceSingleShop(1);
-            PlaceSingleShop(2);
+            //PlaceSingleShop(1);
+            //PlaceSingleShop(2);
         }
 
         public void Update()
@@ -154,8 +154,8 @@ namespace JourneyToTheMysticCave_Beta
                 y = random.Next(GetMapRowCount());
             } while (!EmptySpace(x, y, mapLevel));
             
-            Shop shop = new Shop(new Point2D { x = x, y = y });
-            shops.Add(shop);
+            //Shop shop = new Shop(new Point2D { x = x, y = y });
+            //shops.Add(shop);
             
             levelManager.AllMapContents[mapLevel][y, x] = 'X';
         }

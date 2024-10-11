@@ -16,6 +16,8 @@ namespace JourneyToTheMysticCave_Beta
             _GameManager gameManager = new _GameManager(shops);
 
             gameManager.Gameplay();
+            Console.BufferHeight = 1000;
+            Console.BufferWidth = 1000;
         }
     }
 }

@@ -21,11 +21,11 @@ namespace JourneyToTheMysticCave_Beta
             {
                 stats.MoneyCount -= Price;
                 effect(player);
-                log.AddMessage($"Bought {Name} for {Price} coins.");
+                log.AddMessage($"Bought {Name} for {Price} money.");
             }
             else
             {
-                log.AddMessage($"Not enough money to buy {Name}. It costs {Price} coins.");
+                //log.AddMessage($"Not enough money to buy {Name}. It costs {Price} money.");
             }
         }
     }

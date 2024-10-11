@@ -19,7 +19,7 @@
             EnemyType = enemyType;
         }
 
-        public void RegisterKill(string enemyType, int enemyHealth)
+        public virtual void RegisterKill(string enemyType, int enemyHealth)
         {
             if (!IsComplete && enemyType == EnemyType && enemyHealth <= 0)
             {

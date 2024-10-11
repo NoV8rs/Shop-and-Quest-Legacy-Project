@@ -54,10 +54,6 @@ namespace JourneyToTheMysticCave_Beta
                         log.AddMessage($"Not enough money to buy {currentItem.Name}. It costs {currentItem.Price} coins.");
                     }
                 }
-                else
-                {
-                    log.AddMessage($"Did not buy {currentItem.Name}.");
-                }
             }
         }
 

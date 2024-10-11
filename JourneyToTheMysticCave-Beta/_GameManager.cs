@@ -22,6 +22,8 @@ namespace JourneyToTheMysticCave_Beta
         ItemManager itemManager = new ItemManager();
         QuestLog questLog = new QuestLog();
         MeleeEnemyKillQuest meleeQuest = new MeleeEnemyKillQuest();
+        MageEnemyKillQuest mageQuest = new MageEnemyKillQuest();
+        BossEnemyKillQuest bossQuest = new BossEnemyKillQuest();
         private List<Shop> _shops;
         ShopManager shopManager = new ShopManager();
         //ShopManager shopManagers = new ShopManager();
@@ -51,7 +53,8 @@ namespace JourneyToTheMysticCave_Beta
                 Draw();
                 CheckGameOver();
             }
-            Console.SetCursorPosition(10, 75);
+            int topPosition = Math.Min(100, Console.BufferHeight - 1);
+            Console.SetCursorPosition(20, topPosition);
             EndGame();
         }
 
@@ -64,10 +67,12 @@ namespace JourneyToTheMysticCave_Beta
             legendColors.Init(gameStats, map, levelManager);
             enemyManager.Init(gameStats, levelManager, legendColors, gamelog, player, map, questLog);
             itemManager.Init(gameStats, levelManager, legendColors, gamelog, player, map, enemyManager);
-            gamelog.Init(player, enemyManager, itemManager, gameStats, map);
+            gamelog.Init(player, enemyManager, itemManager, gameStats, map, questLog);
             hUD.Init(player, enemyManager, itemManager, map, legendColors, questLog);
             shopManager.Init(gameStats, legendColors, player, map);
             questLog.AddQuest(meleeQuest); // Add the melee quest to the quest log
+            questLog.AddQuest(mageQuest);
+            questLog.AddQuest(bossQuest);
 
             _shops = new List<Shop>();
             

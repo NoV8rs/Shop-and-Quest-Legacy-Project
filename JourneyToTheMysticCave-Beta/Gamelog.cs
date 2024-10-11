@@ -21,21 +21,22 @@ namespace JourneyToTheMysticCave_Beta
         
         private List<string> messages = new List<string>();
 
-        public void Init(Player player, EnemyManager enemyManager, ItemManager itemManager, GameStats gamestats, Map map)
+        public void Init(Player player, EnemyManager enemyManager, ItemManager itemManager, GameStats gamestats, Map map, QuestLog questLog)
         {
-            this.player = player;
-            this.enemyManager = enemyManager;
-            this.itemManager = itemManager;
-            this.gameStats = gamestats;
-            this.map = map;
+            this.player = player ?? throw new ArgumentNullException(nameof(player));
+            this.enemyManager = enemyManager ?? throw new ArgumentNullException(nameof(enemyManager));
+            this.itemManager = itemManager ?? throw new ArgumentNullException(nameof(itemManager));
+            this.gameStats = gamestats ?? throw new ArgumentNullException(nameof(gamestats));
+            this.map = map ?? throw new ArgumentNullException(nameof(map));
+            this.questLog = questLog ?? throw new ArgumentNullException(nameof(questLog));
         }
 
         public void Update()
         {
-            rowCount = map.GetMapRowCount() + 8;
+            rowCount = map.GetMapRowCount() + 12;
             columnCount = 0;
 
-            for (int i = 0; i < 9; i++) // Assuming 9 lines for HUD display
+            for (int i = 0; i < 13; i++) // Assuming 9 lines for HUD display
             {
                 Console.SetCursorPosition(columnCount, rowCount + i);
                 Console.Write(new string(' ', Console.WindowWidth));
@@ -53,8 +54,8 @@ namespace JourneyToTheMysticCave_Beta
 
         public void Draw()
         {
-            rowCount = map.GetMapRowCount() + 8;
-            columnCount = 0;
+            rowCount = map.GetMapRowCount() + 12; // Assuming 9 lines for HUD display
+            columnCount = 0; // Assuming 9 lines for HUD display
             Console.SetCursorPosition(columnCount, rowCount);
             Console.Write("Game Log:\n");
             LogAttack();
@@ -69,14 +70,6 @@ namespace JourneyToTheMysticCave_Beta
             messages.Add(message);
             Console.WriteLine(message);
         }
-        
-        //public void Displaylog()
-        //{
-         //   foreach (var message in messages)
-          //  {
-           //     Console.WriteLine(message);
-            //}
-        //}
         
         public List<string> GetMessages()
         {

@@ -152,7 +152,7 @@ namespace JourneyToTheMysticCave_Beta
             BossAttack = $"by a giant fist - {BossDamage} damage";
 
             // Money Configs
-            MoneyCount = 6;
+            MoneyCount = 10;
             MoneyCharacter = '$';
             MoneyName = "Money";
 

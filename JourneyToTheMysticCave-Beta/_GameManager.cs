@@ -140,7 +140,8 @@ namespace JourneyToTheMysticCave_Beta
 
         void CheckGameOver()
         {
-            if (enemyManager.AreAllEnemiesDead() && itemManager.IsMoneyCollected())
+            if (bossQuest.IsComplete
+                )
             {
                 gameOver = true;
                 playerWon = true;

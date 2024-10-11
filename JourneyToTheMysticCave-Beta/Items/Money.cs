@@ -22,7 +22,6 @@ namespace JourneyToTheMysticCave_Beta
             {
                 TryCollect();
                 player.money += moneyAmount;
-                Console.WriteLine(moneyAmount + player.money);
             }
         }
     }

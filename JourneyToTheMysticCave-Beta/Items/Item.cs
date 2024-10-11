@@ -49,16 +49,5 @@ namespace JourneyToTheMysticCave_Beta
                 pos = new Point2D { x = 0, y = 0 };
             }
         }
-
-        public void MoneyCollected()
-        {
-            if (!collected)
-            {
-                collected = true;
-                pickedUp = true;
-                pos = new Point2D { x = 0, y = 0 };
-                gameStats.MoneyCount += count;
-            }
-        }
     }
 }

@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
+using System.IO;
+using System.Text.Json;
 
 namespace JourneyToTheMysticCave_Beta
 {
@@ -108,85 +104,77 @@ namespace JourneyToTheMysticCave_Beta
             this.item = item;
 
             GameConfig();
+
+            try
+            {
+                string jsonString = File.ReadAllText("Data/GameData.json");
+                GameStats gameStats = JsonSerializer.Deserialize<GameStats>(jsonString);
+
+                // Copy deserialized values to the current instance
+                if (gameStats != null)
+                {
+                    PlayerName = gameStats.PlayerName;
+                    PlayerCharacter = gameStats.PlayerCharacter;
+                    PlayerDamage = gameStats.PlayerDamage;
+                    PlayerHealth = gameStats.PlayerHealth;
+                    RangerAttack = gameStats.RangerAttack;
+                    RangerCount = gameStats.RangerCount;
+                    RangedCharacter = gameStats.RangedCharacter;
+                    RangerName = gameStats.RangerName;
+                    RangerDamage = gameStats.RangerDamage;
+                    rangerMaxHp = gameStats.rangerMaxHp;
+                    rangerMinHp = gameStats.rangerMinHp;
+                    MageAttack = gameStats.MageAttack;
+                    MageCount = gameStats.MageCount;
+                    MageCharacter = gameStats.MageCharacter;
+                    MageName = gameStats.MageName;
+                    MageDamage = gameStats.MageDamage;
+                    mageMaxHp = gameStats.mageMaxHp;
+                    mageMinHp = gameStats.mageMinHp;
+                    MeleeAttack = gameStats.MeleeAttack;
+                    MeleeCount = gameStats.MeleeCount;
+                    MeleeCharacter = gameStats.MeleeCharacter;
+                    MeleeName = gameStats.MeleeName;
+                    MeleeDamage = gameStats.MeleeDamage;
+                    meleeMaxHp = gameStats.meleeMaxHp;
+                    meleeMinHp = gameStats.meleeMinHp;
+                    BossAttack = gameStats.BossAttack;
+                    BossCount = gameStats.BossCount;
+                    BossCharacter = gameStats.BossCharacter;
+                    BossName = gameStats.BossName;
+                    BossDamage = gameStats.BossDamage;
+                    BossHealth = gameStats.BossHealth;
+                    MoneyCount = gameStats.MoneyCount;
+                    MoneyCharacter = gameStats.MoneyCharacter;
+                    MoneyName = gameStats.MoneyName;
+                    MoneyValue = gameStats.MoneyValue;
+                    PotionCount = gameStats.PotionCount;
+                    PotionCharacter = gameStats.PotionCharacter;
+                    PotionName = gameStats.PotionName;
+                    PotionHeal = gameStats.PotionHeal;
+                    TrapCount = gameStats.TrapCount;
+                    TrapCharacter = gameStats.TrapCharacter;
+                    TrapName = gameStats.TrapName;
+                    TrapDamage = gameStats.TrapDamage;
+                    SwordCount = gameStats.SwordCount;
+                    SwordCharacter = gameStats.SwordCharacter;
+                    SwordName = gameStats.SwordName;
+                    SwordMultiplier = gameStats.SwordMultiplier;
+                    ShopCount = gameStats.ShopCount;
+                    ShopCharacter = gameStats.ShopCharacter;
+                    ShopName = gameStats.ShopName;
+                    PoisonDamage = gameStats.PoisonDamage;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error reading JSON file: {ex.Message}");
+            }
         }
 
         public void GameConfig()
         {
-            //Player Configs/Stats
-            PlayerCharacter = 'H';
-            PlayerName = "Harold";
-            //PlayerHealth = 300; //for testing only
-            PlayerHealth = 100; 
-            PlayerDamage = 10;
             PlayerPos = new Point2D { x = 2, y = 5 };
-
-            // Ranger Configs/Stats
-            RangerCount = 3;
-            RangedCharacter = 'R';
-            RangerName = "Ranger";
-            RangerDamage = 1;
-            rangerMinHp = 35;
-            rangerMaxHp = 60;
-            RangerAttack = $"by Ranger arrow - {RangerDamage} damage";
-
-            // Mage Configs/Stats
-            MageCount = 3;
-            MageCharacter = 'M';
-            MageName = "Mage";
-            MageDamage = 3;
-            mageMinHp = 40;
-            mageMaxHp = 65;
-            MageAttack = $"by mage magic - {MageDamage} damage";
-
-            // Melee Configs/Stats
-            MeleeCount = 30;
-            MeleeCharacter = 'S';
-            MeleeName = "Slime";
-            MeleeDamage = 1;
-            meleeMinHp = 2;
-            meleeMaxHp = 10;
-            MeleeAttack = $"by Slime sludge - {MeleeDamage} damage";
-
-            // Boss Configs/Stats
-            BossCount = 1;
-            BossCharacter = 'B';
-            BossName = "Boss";
-            BossDamage = 6;
-            BossHealth = 200;
-            BossAttack = $"by a giant fist - {BossDamage} damage";
-
-            // Money Configs
-            MoneyCount = 10;
-            MoneyCharacter = '$';
-            MoneyName = "Money";
-            MoneyValue = 1;
-            
-            // Potion Configs
-            PotionCount = 6;
-            PotionName = "Potion";
-            PotionCharacter = '6';
-            PotionHeal = 10;
-
-            // Trap Configs
-            TrapCount = 30;
-            TrapCharacter = 'T';
-            TrapName = "Trap";
-            TrapDamage = 4;
-
-            // Sword Configs
-            SwordCount = 3;
-            SwordCharacter = 't';
-            SwordName = "Sword";
-            SwordMultiplier = 10;
-            
-            // Shop Configs
-            ShopCount = 3;
-            ShopCharacter = 'X';
-            ShopName = "Shop";
-            
-
-            // Floor Damage
-            PoisonDamage = 5;
         }
 
         public int GiveHealth(Random random, string type)

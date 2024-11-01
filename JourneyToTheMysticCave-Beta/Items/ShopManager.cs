@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System;
+﻿using System;
+using System.Collections.Generic;
 
 namespace JourneyToTheMysticCave_Beta
 {
@@ -43,14 +43,6 @@ namespace JourneyToTheMysticCave_Beta
                 Shop shop = new Shop(shopPosition);
                 shops.Add(shop);
                 map.GetCurrentMapContent()[shopPosition.y, shopPosition.x] = gameStats.ShopCharacter;
-            }
-        }
-
-        public void Update()
-        {
-            foreach (var shop in shops)
-            {
-                // Update shop logic if needed
             }
         }
 

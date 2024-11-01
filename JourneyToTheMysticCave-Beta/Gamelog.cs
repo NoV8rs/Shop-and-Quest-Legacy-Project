@@ -33,13 +33,23 @@ namespace JourneyToTheMysticCave_Beta
 
         public void Update()
         {
-            rowCount = map.GetMapRowCount() + 12;
+            rowCount = map.GetMapRowCount() + 13;
             columnCount = 0;
 
-            for (int i = 0; i < 13; i++) // Assuming 9 lines for HUD display
+            // Ensure rowCount is within the console buffer height
+            if (rowCount >= Console.BufferHeight)
             {
-                Console.SetCursorPosition(columnCount, rowCount + i);
-                Console.Write(new string(' ', Console.WindowWidth));
+                rowCount = Console.BufferHeight - 1;
+            }
+
+            for (int i = 0; i < 14; i++) // Assuming 9 lines for HUD display
+            {
+                int currentRow = rowCount + i;
+                if (currentRow < Console.BufferHeight)
+                {
+                    Console.SetCursorPosition(columnCount, currentRow);
+                    Console.Write(new string(' ', Console.WindowWidth));
+                }
             }
         }
         
@@ -54,7 +64,7 @@ namespace JourneyToTheMysticCave_Beta
 
         public void Draw()
         {
-            rowCount = map.GetMapRowCount() + 12; // Assuming 9 lines for HUD display
+            rowCount = map.GetMapRowCount() + 13; // Assuming 9 lines for HUD display
             columnCount = 0; // Assuming 9 lines for HUD display
             Console.SetCursorPosition(columnCount, rowCount);
             Console.Write("Game Log:\n");

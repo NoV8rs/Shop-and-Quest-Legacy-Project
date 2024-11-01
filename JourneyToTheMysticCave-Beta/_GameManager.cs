@@ -70,7 +70,7 @@ namespace JourneyToTheMysticCave_Beta
             itemManager.Init(gameStats, levelManager, legendColors, gamelog, player, map, enemyManager);
             gamelog.Init(player, enemyManager, itemManager, gameStats, map, questLog);
             hUD.Init(player, enemyManager, itemManager, map, legendColors, questLog, gameStats);
-            shopManager.Init(gameStats, legendColors, player, map);
+            //shopManager.Init(gameStats, legendColors, player, map);
             questLog.AddQuest(meleeQuest); // Add the melee quest to the quest log
             questLog.AddQuest(mageQuest);
             questLog.AddQuest(bossQuest);
@@ -89,7 +89,7 @@ namespace JourneyToTheMysticCave_Beta
             itemManager.Update();
             hUD.Update();
             gamelog.Update();
-            shopManager.Update();
+            //shopManager.Update();
         }
 
         private void Draw()

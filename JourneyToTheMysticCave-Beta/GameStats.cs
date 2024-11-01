@@ -109,8 +109,6 @@ namespace JourneyToTheMysticCave_Beta
             {
                 string jsonString = File.ReadAllText("Data/GameData.json");
                 GameStats gameStats = JsonSerializer.Deserialize<GameStats>(jsonString);
-
-                // Copy deserialized values to the current instance
                 if (gameStats != null)
                 {
                     PlayerName = gameStats.PlayerName;
